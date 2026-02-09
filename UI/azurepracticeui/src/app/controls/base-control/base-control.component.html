@@ -1,0 +1,20 @@
+<div class="form-group">
+  <label [for]="config.name" class="form-label">
+    {{ config.label }}
+    <span *ngIf="config.required" class="required-asterisk">*</span>
+  </label>
+
+  <input
+    [id]="config.name"
+    [type]="config.type || 'text'"
+    [placeholder]="config.placeholder || ''"
+    [formControl]="control"
+    (change)="onValueChange($event.target.value)"
+    class="form-control"
+    [class.is-invalid]="showError"
+  />
+
+  <div *ngIf="showError" class="error-message">
+    {{ errorMessage }}
+  </div>
+</div>

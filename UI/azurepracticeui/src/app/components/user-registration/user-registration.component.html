@@ -1,0 +1,48 @@
+<div class="registration-form-container">
+  <h2>Create Your Account</h2>
+  
+  <!-- Success Message -->
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{ successMessage }}
+  </div>
+
+  <!-- Error Message -->
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{ errorMessage }}
+  </div>
+
+  <form [formGroup]="registrationForm" (ngSubmit)="onSubmit()">
+    <app-base-control
+      *ngFor="let config of controlConfigs"
+      [config]="config"
+      [control]="f[config.name]"
+      [submitted]="submitted"
+    ></app-base-control>
+
+    <div class="form-actions">
+      <button 
+        type="submit" 
+        class="btn btn-primary"
+        [disabled]="isLoading"
+      >
+        <span *ngIf="!isLoading">Register</span>
+        <span *ngIf="isLoading">
+          <span class="spinner"></span> Registering...
+        </span>
+      </button>
+      
+      <button 
+        type="button" 
+        class="btn btn-secondary"
+        (click)="resetForm()"
+        [disabled]="isLoading"
+      >
+        Reset
+      </button>
+    </div>
+
+    <div class="login-link">
+      <p>Already have an account? <a routerLink="/login">Login here</a></p>
+    </div>
+  </form>
+</div>
